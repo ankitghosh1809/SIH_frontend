@@ -1,3 +1,4 @@
+agent-4-patients
 // STUB — DELETE AT STITCH TIME.
 // Owned by Agent 1 (src/lib/utils.ts). Standard shadcn/ui class-merging
 // helper — not named explicitly in the work order, but every generated
@@ -9,4 +10,10 @@ import { twMerge } from "tailwind-merge";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
+import { clsx, type ClassValue } from "clsx"
+import { twMerge } from "tailwind-merge"
+
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs))
+ main
 }
