@@ -1,12 +1,14 @@
-// DEV HARNESS ONLY — see HANDOFF_NOTES.md. Not part of Agent 6's delivered scope.
-import { StrictMode } from "react";
-import { createRoot } from "react-dom/client";
-
+// DEV HARNESS ONLY — not part of Agent 3's owned scope (see src/pages/scans/).
+// Agent 1 owns the real src/main.tsx; this exists purely so this branch is
+// runnable/buildable in isolation before stitching. Safe to discard at
+// stitch time.
+import React from "react";
+import ReactDOM from "react-dom/client";
 import App from "./App";
 import "./index.css";
 
-createRoot(document.getElementById("root")!).render(
-  <StrictMode>
+ReactDOM.createRoot(document.getElementById("root")!).render(
+  <React.StrictMode>
     <App />
-  </StrictMode>,
+  </React.StrictMode>
 );

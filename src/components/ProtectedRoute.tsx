@@ -1,45 +1,23 @@
-agent-6-admin
-// STUB — DELETE AT STITCH TIME. Matches the signature referenced across the work order:
-// <ProtectedRoute roles?: UserRole[]>. No roles prop = any logged-in user (see Notifications
-// in routes.tsx). Not authenticated -> redirect home. Wrong role -> in-place message rather
-// than a redirect, so it's obvious in dev/QA *why* a route is blocked.
-import type { ReactNode } from "react";
-import { Navigate } from "react-router-dom";
-
-import { ErrorState } from "@/components/ErrorState";
-import { useAuth } from "@/contexts/AuthContext";
-import type { UserRole } from "@/types/api";
-
-interface ProtectedRouteProps {
-  roles?: UserRole[];
-  children: ReactNode;
-}
-
-export function ProtectedRoute({ roles, children }: ProtectedRouteProps) {
-  const { user } = useAuth();
-
-  if (!user) {
-    return <Navigate to="/" replace />;
-  }
-
-  if (roles && !roles.includes(user.role)) {
-    return <ErrorState title="Admins only" description="You don't have access to this page." />;
-  }
 // STUB — DELETE AT STITCH TIME.
-// Owned by Agent 1 (src/components/ProtectedRoute.tsx). Real signature
-// per the work order: <ProtectedRoute roles?: UserRole[]>. This local
-// copy has no real auth check — it just renders its children — so
-// routes.tsx below can be built and previewed without a real auth flow.
+// Owned by Agent 1 at this same path. Auth isn't built yet, so this stub is
+// an unconditional pass-through matching the signature the work order
+// describes (`<ProtectedRoute roles?: UserRole[]>`) purely so
+// scans/routes.tsx type-checks and renders standalone. Agent 1's real
+// version will gate on actual auth state / roles. Delete this file when
+// Agent 1's real src/components/ProtectedRoute.tsx lands at the same path.
 
 import type { ReactNode } from "react";
-import type { UserRole } from "@/types/api";
 
-interface ProtectedRouteProps {
+// Minimal placeholder so this stub's signature matches what the work order
+// describes; Agent 1's real types/api.ts (or a dedicated auth types file)
+// will define the authoritative version.
+export type UserRole = "patient" | "doctor" | "admin";
+
+export interface ProtectedRouteProps {
   children: ReactNode;
   roles?: UserRole[];
 }
 
 export function ProtectedRoute({ children }: ProtectedRouteProps) {
-main
   return <>{children}</>;
 }
