@@ -1,3 +1,23 @@
+agent-6-admin
+import * as React from "react";
+
+import { cn } from "@/lib/utils";
+
+export function Card({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {
+  return <div className={cn("rounded-lg border border-neutral-200 bg-white", className)} {...props} />;
+}
+
+export function CardHeader({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {
+  return <div className={cn("flex flex-col gap-1 p-5 pb-3", className)} {...props} />;
+}
+
+export function CardTitle({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) {
+  return <h3 className={cn("text-sm font-medium text-neutral-900", className)} {...props} />;
+}
+
+export function CardContent({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {
+  return <div className={cn("p-5 pt-0", className)} {...props} />;
+}
 agent-4-patients
 // Generated-via-CLI convention, hand-written here — see button.tsx for why.
 agent-7-marketing-polish
@@ -156,4 +176,5 @@ export function CardContent({ className = "", ...props }: React.HTMLAttributes<H
   return <div className={`p-6 pt-0 ${className}`} {...props} />;
 main
 }
+main
 main

@@ -1,3 +1,10 @@
+agent-6-admin
+// STUB — DELETE AT STITCH TIME. Owned by Agent 1; only what Agent 6 needs.
+import type { UserRole } from "@/types/api";
+export const ROUTES = {
+  admin: "/admin",
+  auditLog: "/admin/audit-log",
+  notifications: "/notifications",
 agent-7-marketing-polish
 // STUB — DELETE AT STITCH TIME. Owned by Agent 1 (src/lib/routes.ts).
 // This is a minimal placeholder with only what Agent 7's marketing pages
@@ -15,7 +22,7 @@ export const ROUTES = {
 // entries this module needs.
 
 export const ROUTES = {
-agent-4-patients
+  agent-4-patients
   patients: "/patients",
   newPatient: "/patients/new",
   patientDetail: (id: string) => `/patients/${id}`,
@@ -25,10 +32,14 @@ agent-4-patients
   batchUpload: "/upload/batch",
  main
 main
+main
 };
 
 export interface NavItem {
   label: string;
   path: string;
+  agent-6-admin
+  roles?: UserRole[];
   roles?: string[];
+  main
 }
