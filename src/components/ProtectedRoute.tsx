@@ -1,3 +1,4 @@
+agent-6-admin
 // STUB — DELETE AT STITCH TIME. Matches the signature referenced across the work order:
 // <ProtectedRoute roles?: UserRole[]>. No roles prop = any logged-in user (see Notifications
 // in routes.tsx). Not authenticated -> redirect home. Wrong role -> in-place message rather
@@ -24,6 +25,21 @@ export function ProtectedRoute({ roles, children }: ProtectedRouteProps) {
   if (roles && !roles.includes(user.role)) {
     return <ErrorState title="Admins only" description="You don't have access to this page." />;
   }
+// STUB — DELETE AT STITCH TIME.
+// Owned by Agent 1 (src/components/ProtectedRoute.tsx). Real signature
+// per the work order: <ProtectedRoute roles?: UserRole[]>. This local
+// copy has no real auth check — it just renders its children — so
+// routes.tsx below can be built and previewed without a real auth flow.
 
+import type { ReactNode } from "react";
+import type { UserRole } from "@/types/api";
+
+interface ProtectedRouteProps {
+  children: ReactNode;
+  roles?: UserRole[];
+}
+
+export function ProtectedRoute({ children }: ProtectedRouteProps) {
+main
   return <>{children}</>;
 }
