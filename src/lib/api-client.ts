@@ -1,5 +1,5 @@
 // STUB — DELETE AT STITCH TIME.
-// Agent 1 owns the real src/lib/api-client.ts. Reproduced verbatim from the work order.
+// Owned by Agent 1 (src/lib/api-client.ts).
 
 import axios from "axios";
 
