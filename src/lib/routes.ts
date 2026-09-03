@@ -1,11 +1,12 @@
 // STUB — DELETE AT STITCH TIME.
-// Agent 1 owns the real src/lib/routes.ts (the full route map). Reproduced verbatim from the
-// work order, only what Agent 2 (Screening) needs.
+// Owned by Agent 1 (src/lib/routes.ts). Minimal local copy — only the
+// entries this module needs.
 
 export const ROUTES = {
-  scanDetail: (id: string) => `/scans/${id}`,
-  upload: "/upload",
-  batchUpload: "/upload/batch",
+  patients: "/patients",
+  newPatient: "/patients/new",
+  patientDetail: (id: string) => `/patients/${id}`,
+  scanDetail: (id: string) => `/scans/${id}`, // Agent 3's page — we only link to it
 };
 
 export interface NavItem {

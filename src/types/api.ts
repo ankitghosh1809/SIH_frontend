@@ -1,46 +1,52 @@
 // STUB — DELETE AT STITCH TIME.
-// Agent 1 owns the real src/types/api.ts (the full shared contract). This is only the slice
-// Agent 2 (Screening) touches, reproduced verbatim from the work order.
+// Owned by Agent 1 (src/types/api.ts). This is a minimal local copy
+// covering only what src/pages/patients/** touches, so Agent 4 can
+// build and type-check independently. Delete this file at stitch
+// time when Agent 1's real src/types/api.ts lands at this same path.
+//
+// `UserRole` is not in the work order's given snippet — added only
+// because ProtectedRoute's stub signature (roles?: UserRole[]) needs
+// it to exist. None of this module's routes actually pass a `roles`
+// prop, so the exact members don't matter for this branch.
 
 export type RiskLevel = "low" | "medium" | "high";
 
-export interface PredictionField {
-  positive: boolean;
-  probability: number;
-  uncertainty?: number | null;
+export type UserRole = "admin" | "doctor" | "technician";
+
+export interface PatientCreate {
+  full_name: string;
+  age?: number | null;
+  gender?: string | null;
+  phone?: string | null;
+  diabetes_type?: string | null;
 }
 
-export interface Prediction {
-  diabetic_retinopathy: PredictionField;
-  cataract: PredictionField;
+export interface PatientResponse {
+  id: string;
+  full_name: string;
+  age: number | null;
+  gender: string | null;
+  phone: string | null;
+  diabetes_type: string | null;
+  created_at: string;
 }
 
-export interface ScanResponse {
+export interface PatientScanSummary {
   scan_id: string;
   created_at: string;
-  prediction: Prediction;
-  risk_level: RiskLevel;
-  heatmap_url: string;
-  model_version: string;
-}
-
-export interface BatchItemResult {
-  filename: string;
-  scan_id: string | null;
   risk_level: RiskLevel | null;
-  error: string | null;
+  dr_probability: number | null;
+  cataract_probability: number | null;
 }
 
-export interface BatchSummary {
-  total: number;
-  succeeded: number;
-  failed: number;
-  low_risk: number;
-  medium_risk: number;
-  high_risk: number;
+export interface TrendPoint {
+  created_at: string;
+  dr_probability: number | null;
+  cataract_probability: number | null;
+  risk_level: RiskLevel | null;
 }
 
-export interface BatchResponse {
-  results: BatchItemResult[];
-  summary: BatchSummary;
+export interface TrendResponse {
+  patient_id: string;
+  points: TrendPoint[];
 }

@@ -1,12 +1,11 @@
 // STUB — DELETE AT STITCH TIME.
-// Agent 1 owns the real src/components/ProtectedRoute.tsx. The real version checks auth state
-// and redirects unauthenticated users, optionally gated by `roles`. This stub renders children
-// unconditionally so the screening routes are reachable during standalone development, matching
-// the signature the work order names: <ProtectedRoute roles?: UserRole[]>.
+// Owned by Agent 1 (src/components/ProtectedRoute.tsx). Real signature
+// per the work order: <ProtectedRoute roles?: UserRole[]>. This local
+// copy has no real auth check — it just renders its children — so
+// routes.tsx below can be built and previewed without a real auth flow.
 
 import type { ReactNode } from "react";
-
-type UserRole = string;
+import type { UserRole } from "@/types/api";
 
 interface ProtectedRouteProps {
   children: ReactNode;
