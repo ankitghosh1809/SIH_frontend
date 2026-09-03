@@ -34,7 +34,7 @@ export default function AboutPage() {
 
       <section
         aria-labelledby="team-heading"
-        className="border-t border-border bg-surface"
+        className="border-t border-border bg-muted"
       >
         <div className="mx-auto max-w-3xl px-6 py-14">
           <h2
@@ -115,7 +115,7 @@ export default function AboutPage() {
         </p>
         <Link
           to={ROUTES.privacy}
-          className="mt-6 inline-flex items-center gap-1 text-sm font-medium text-primary underline-offset-4 hover:underline"
+          className="mt-6 inline-flex items-center gap-1 rounded-sm text-sm font-medium text-primary underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
         >
           Read what data we collect and where our privacy practices stand
           <ArrowRight className="size-4" aria-hidden="true" />

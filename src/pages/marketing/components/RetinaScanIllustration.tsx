@@ -10,7 +10,7 @@ export function RetinaScanIllustration({ className }: { className?: string }) {
         cx="200"
         cy="200"
         r="180"
-        fill="var(--color-surface)"
+        fill="var(--color-muted)"
         stroke="var(--color-border)"
         strokeWidth="2"
       />

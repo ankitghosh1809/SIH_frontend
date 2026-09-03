@@ -59,7 +59,7 @@ export default function HomePage() {
               </Button>
               <Link
                 to={ROUTES.login}
-                className="text-sm font-medium text-foreground underline-offset-4 hover:text-primary hover:underline"
+                className="rounded-sm text-sm font-medium text-foreground underline-offset-4 hover:text-primary hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
               >
                 Already have an account? Log in
               </Link>
@@ -74,7 +74,7 @@ export default function HomePage() {
 
       <section
         aria-labelledby="how-it-works-heading"
-        className="border-t border-border bg-surface"
+        className="border-t border-border bg-muted"
       >
         <div className="mx-auto max-w-5xl px-6 py-16">
           <h2
@@ -88,7 +88,7 @@ export default function HomePage() {
             review. This is a hackathon-stage build. See the{" "}
             <Link
               to={ROUTES.about}
-              className="underline-offset-4 hover:text-primary hover:underline"
+              className="rounded-sm underline-offset-4 hover:text-primary hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
             >
               About page
             </Link>{" "}
@@ -132,7 +132,7 @@ export default function HomePage() {
         </p>
         <Link
           to={ROUTES.about}
-          className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-primary underline-offset-4 hover:underline"
+          className="mt-4 inline-flex items-center gap-1 rounded-sm text-sm font-medium text-primary underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
         >
           Read more about the project and the team
           <ArrowRight className="size-4" aria-hidden="true" />

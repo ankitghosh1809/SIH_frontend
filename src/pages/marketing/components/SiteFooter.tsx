@@ -16,7 +16,7 @@ const FOOTER_LINKS = [
  */
 export function SiteFooter() {
   return (
-    <footer className="border-t border-border bg-surface">
+    <footer className="border-t border-border bg-muted">
       <div className="mx-auto max-w-5xl px-6 py-10">
         <div className="flex flex-col gap-6 sm:flex-row sm:items-start sm:justify-between">
           <div className="max-w-md">
@@ -32,7 +32,7 @@ export function SiteFooter() {
                 <li key={link.path}>
                   <Link
                     to={link.path}
-                    className="text-foreground underline-offset-4 hover:text-primary hover:underline"
+                    className="rounded-sm text-foreground underline-offset-4 hover:text-primary hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
                   >
                     {link.label}
                   </Link>
