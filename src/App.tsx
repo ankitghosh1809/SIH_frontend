@@ -1,27 +1,51 @@
-import { ShieldCheck } from "lucide-react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { AppShell } from "@/components/layout/AppShell";
+import { AuthProvider } from "@/contexts/AuthContext";
+import type { NavItem } from "@/lib/routes";
+import { adminNavItems, adminRoutes } from "@/pages/admin/routes";
+import { authNavItems, authRoutes } from "@/pages/auth/routes";
+import { marketingNavItems, marketingRoutes } from "@/pages/marketing/routes";
+import { patientsNavItems, patientsRoutes } from "@/pages/patients/routes";
+import { reviewNavItems, reviewRoutes } from "@/pages/review/routes";
+import { scansNavItems, scansRoutes } from "@/pages/scans/routes";
+import { screeningNavItems, screeningRoutes } from "@/pages/screening/routes";
 
-// Temporary smoke-test screen: confirms Tailwind v4 + shadcn/ui + Radix +
-// lucide-react are wired up correctly. Replaced for real in Task 9.
+// All seven feature route arrays. Agents 2-7 each replace one placeholder
+// import's target file at stitch time; this list itself never changes.
+const allRoutes = [
+  ...authRoutes,
+  ...marketingRoutes,
+  ...screeningRoutes,
+  ...scansRoutes,
+  ...patientsRoutes,
+  ...reviewRoutes,
+  ...adminRoutes,
+];
+
+const allNavItems: NavItem[] = [
+  ...authNavItems,
+  ...marketingNavItems,
+  ...screeningNavItems,
+  ...scansNavItems,
+  ...patientsNavItems,
+  ...reviewNavItems,
+  ...adminNavItems,
+];
+
 function App() {
   return (
-    <div className="flex min-h-svh items-center justify-center bg-background p-8">
-      <Card className="w-full max-w-sm">
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2">
-            <ShieldCheck className="size-5 text-primary" />
-            Scaffold smoke test
-          </CardTitle>
-        </CardHeader>
-        <CardContent className="flex flex-col gap-3">
-          <Badge>Task 1 in progress</Badge>
-          <Button>Primary button</Button>
-        </CardContent>
-      </Card>
-    </div>
+    <BrowserRouter>
+      <AuthProvider>
+        <AppShell navItems={allNavItems}>
+          <Routes>
+            {allRoutes.map((route) => (
+              <Route key={String(route.path)} path={route.path} element={route.element} />
+            ))}
+          </Routes>
+        </AppShell>
+      </AuthProvider>
+    </BrowserRouter>
   );
 }
 
