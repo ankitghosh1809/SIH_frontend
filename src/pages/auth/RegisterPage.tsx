@@ -108,6 +108,9 @@ export function RegisterPage() {
                   <FormItem>
                     <FormLabel>Username</FormLabel>
                     <FormControl>
+                      {/* eslint-disable-next-line jsx-a11y/no-autofocus -- the
+                          register form is the sole content of its page, so
+                          autofocus here does not disorient anyone. */}
                       <Input autoComplete="username" autoFocus {...field} />
                     </FormControl>
                     <FormMessage />

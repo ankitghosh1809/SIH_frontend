@@ -64,7 +64,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, [logout]);
 
   // On mount, re-validate any token already in localStorage via /me rather
-  // than trusting it blindly — it may have expired since the last visit.
+  // than trusting it blindly. It may have expired since the last visit.
   useEffect(() => {
     const existingToken = localStorage.getItem(TOKEN_STORAGE_KEY);
     if (!existingToken) {

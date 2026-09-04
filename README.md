@@ -1,32 +1,48 @@
-# React + TypeScript + Vite
+# SIH26139 Screening, frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+Frontend for SIH26139: a hybrid quantum-ML platform for diabetic retinopathy and cataract
+screening from retinal fundus photos, built for Smart India Hackathon 2026.
 
-Currently, two official plugins are available:
+This repo is being built by 7 parallel agents against a shared contract. This branch,
+`agent-1-foundation`, is the foundation: project scaffold, design system, routing contract,
+API client, auth, and the shared layout shell that every other feature is rendered inside.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Stack
 
-## React Compiler
+- React 18 + TypeScript + Vite
+- Tailwind CSS v4 (via `@tailwindcss/vite`, no `tailwind.config.ts` or PostCSS config needed)
+- shadcn/ui (new-york style, Radix UI primitives), lucide-react icons
+- react-router-dom v6, @tanstack/react-query, @tanstack/react-table
+- react-hook-form + zod for forms, axios for HTTP, recharts for charts, date-fns, sonner for toasts
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Getting started
 
-## Expanding the Oxlint configuration
-
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
-
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
+```bash
+npm install
+cp .env.example .env   # set VITE_API_BASE_URL if the backend isn't on localhost:8000
+npm run dev            # serves on http://localhost:3000, matching the backend's default CORS origin
 ```
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+The backend (`SIH_backend`) needs to be running locally for login, registration, and any
+data-fetching page to work. See that repo's README for setup.
+
+`npm run build` runs a full TypeScript check before bundling; `npm run lint` runs ESLint.
+
+## Shared contracts
+
+Two files are identical across all 7 branches and should never be changed without updating
+every branch:
+
+- `src/types/api.ts`: every backend request/response shape.
+- `src/lib/routes.ts`: the `ROUTES` path constants and the `NavItem` type.
+
+Every feature folder under `src/pages/*` exports exactly two names from its own `routes.tsx`:
+`<feature>Routes: RouteObject[]` and `<feature>NavItems: NavItem[]`. `src/App.tsx` imports all
+seven pairs and renders them inside `AppShell`; that wiring does not change as real pages replace
+the placeholder ones.
+
+## What's real here vs. a placeholder
+
+`src/pages/auth/*` (login, register) is real. `src/pages/{marketing,screening,scans,patients,
+review,admin}/routes.tsx` are placeholder stubs, each clearly marked `STUB - DELETE AT STITCH
+TIME`, that exist only so the app boots and routes before the other agents land their real pages.
