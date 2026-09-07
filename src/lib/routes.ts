@@ -1,16 +1,31 @@
-// STUB — DELETE AT STITCH TIME.
-// Owned by Agent 1 at this same path, reproduced verbatim from the work
-// order. Delete this file when Agent 1's real src/lib/routes.ts lands at
-// the same path.
-
-export const ROUTES = {
-  scanHistory: "/scans",
-  scanDetail: (id: string) => `/scans/${id}`,
-  scanReview: (id: string) => `/scans/${id}/review`, // Agent 5's page, only linked to
-};
+// src/lib/routes.ts — SHARED CONTRACT. Create this file exactly as given.
+import type { ComponentType, SVGProps } from "react";
+import type { UserRole } from "@/types/api";
 
 export interface NavItem {
   label: string;
   path: string;
-  roles?: string[];
+  icon?: ComponentType<SVGProps<SVGSVGElement>>;
+  roles?: UserRole[]; // omit = visible to everyone, including logged-out visitors
 }
+
+export const ROUTES = {
+  home: "/",
+  about: "/about",
+  privacy: "/privacy",
+  login: "/login",
+  register: "/register",
+  upload: "/upload",
+  batchUpload: "/upload/batch",
+  scanHistory: "/scans",
+  scanDetail: (id: string) => `/scans/${id}`,
+  scanReview: (id: string) => `/scans/${id}/review`,
+  patients: "/patients",
+  newPatient: "/patients/new",
+  patientDetail: (id: string) => `/patients/${id}`,
+  referrals: "/referrals",
+  referralDetail: (id: string) => `/referrals/${id}`,
+  admin: "/admin",
+  auditLog: "/admin/audit-log",
+  notifications: "/notifications",
+} as const;

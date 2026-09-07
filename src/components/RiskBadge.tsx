@@ -1,16 +1,44 @@
-// STUB — DELETE AT STITCH TIME.
-// Owned by Agent 1 at this same path, reproduced verbatim from the work
-// order. Delete this file when Agent 1's real src/components/RiskBadge.tsx
-// lands at the same path.
+import { AlertCircle, AlertTriangle, CheckCircle2 } from "lucide-react";
 
-export function RiskBadge({ level }: { level: "low" | "medium" | "high" }) {
-  const color =
-    level === "high"
-      ? "bg-red-100 text-red-800"
-      : level === "medium"
-      ? "bg-amber-100 text-amber-800"
-      : "bg-green-100 text-green-800";
+import { Badge } from "@/components/ui/badge";
+import { cn } from "@/lib/utils";
+import type { RiskLevel } from "@/types/api";
+
+const RISK_CONFIG: Record<
+  RiskLevel,
+  { label: string; icon: typeof CheckCircle2; className: string }
+> = {
+  low: {
+    label: "Low risk",
+    icon: CheckCircle2,
+    className: "border-risk-low-border bg-risk-low-bg text-risk-low",
+  },
+  medium: {
+    label: "Medium risk",
+    icon: AlertTriangle,
+    className: "border-risk-medium-border bg-risk-medium-bg text-risk-medium",
+  },
+  high: {
+    label: "High risk",
+    icon: AlertCircle,
+    className: "border-risk-high-border bg-risk-high-bg text-risk-high",
+  },
+};
+
+interface RiskBadgeProps {
+  level: RiskLevel;
+  className?: string;
+}
+
+// The single source of risk-level styling and labels. Every other agent
+// renders a risk level with this component instead of inventing their own
+// color logic, and these colors are deliberately separate from --primary.
+export function RiskBadge({ level, className }: RiskBadgeProps) {
+  const { label, icon: Icon, className: colorClassName } = RISK_CONFIG[level];
   return (
-    <span className={`rounded px-2 py-0.5 text-xs font-medium ${color}`}>{level}</span>
+    <Badge variant="outline" className={cn("font-medium", colorClassName, className)}>
+      <Icon className="size-3.5" aria-hidden="true" />
+      {label}
+    </Badge>
   );
 }

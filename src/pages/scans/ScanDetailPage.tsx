@@ -45,7 +45,11 @@ export default function ScanDetailPage() {
                 ? "This scan doesn't exist, or may have been removed."
                 : "Check your connection and try again."
             }
-            action={{ label: "Back to scan history", href: ROUTES.scanHistory }}
+            action={
+              <Button asChild variant="outline">
+                <Link to={ROUTES.scanHistory}>Back to scan history</Link>
+              </Button>
+            }
           />
         ) : scanQuery.data ? (
           <ScanDetailContent

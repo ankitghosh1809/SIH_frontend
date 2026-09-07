@@ -1,26 +1,52 @@
-// DEV HARNESS ONLY — not part of Agent 3's owned scope (see src/pages/scans/).
-// Agent 1 owns the real src/App.tsx (and the real top-level nav that would
-// use scanNavItems); this exists purely so scanRoutes is reachable and this
-// branch is runnable/buildable in isolation before stitching. Safe to
-// discard at stitch time.
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { Navigate, RouterProvider, createBrowserRouter } from "react-router-dom";
-import { Toaster } from "sonner";
-import { ROUTES } from "@/lib/routes";
-import { scanRoutes } from "@/pages/scans/routes";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
-const queryClient = new QueryClient();
+import { AppShell } from "@/components/layout/AppShell";
+import { AuthProvider } from "@/contexts/AuthContext";
+import type { NavItem } from "@/lib/routes";
+import { adminNavItems, adminRoutes } from "@/pages/admin/routes";
+import { authNavItems, authRoutes } from "@/pages/auth/routes";
+import { marketingNavItems, marketingRoutes } from "@/pages/marketing/routes";
+import { patientNavItems as patientsNavItems, patientRoutes as patientsRoutes } from "@/pages/patients/routes";
+import { reviewNavItems, reviewRoutes } from "@/pages/review/routes";
+import { scanNavItems as scansNavItems, scanRoutes as scansRoutes } from "@/pages/scans/routes";
+import { screeningNavItems, screeningRoutes } from "@/pages/screening/routes";
 
-const router = createBrowserRouter([
-  { path: "/", element: <Navigate to={ROUTES.scanHistory} replace /> },
-  ...scanRoutes,
-]);
+// All seven feature route arrays. Agents 2-7 each replace one placeholder
+// import's target file at stitch time; this list itself never changes.
+const allRoutes = [
+  ...authRoutes,
+  ...marketingRoutes,
+  ...screeningRoutes,
+  ...scansRoutes,
+  ...patientsRoutes,
+  ...reviewRoutes,
+  ...adminRoutes,
+];
 
-export default function App() {
+const allNavItems: NavItem[] = [
+  ...authNavItems,
+  ...marketingNavItems,
+  ...screeningNavItems,
+  ...scansNavItems,
+  ...patientsNavItems,
+  ...reviewNavItems,
+  ...adminNavItems,
+];
+
+function App() {
   return (
-    <QueryClientProvider client={queryClient}>
-      <RouterProvider router={router} />
-      <Toaster richColors position="top-right" />
-    </QueryClientProvider>
+    <BrowserRouter>
+      <AuthProvider>
+        <AppShell navItems={allNavItems}>
+          <Routes>
+            {allRoutes.map((route) => (
+              <Route key={String(route.path)} path={route.path} element={route.element} />
+            ))}
+          </Routes>
+        </AppShell>
+      </AuthProvider>
+    </BrowserRouter>
   );
 }
+
+export default App;

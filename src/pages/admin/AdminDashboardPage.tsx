@@ -17,6 +17,7 @@ import { ErrorState } from "@/components/ErrorState";
 import { RiskBadge } from "@/components/RiskBadge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
+import type { RiskLevel } from "@/types/api";
 
 import { useAdminStats } from "./hooks/useAdminStats";
 
@@ -106,7 +107,10 @@ export default function AdminDashboardPage() {
     );
   }
 
-  const riskData = Object.entries(data.by_risk_level).map(([level, count]) => ({ level, count }));
+  const riskData = Object.entries(data.by_risk_level).map(([level, count]) => ({
+    level: level as RiskLevel,
+    count,
+  }));
   const modelData = Object.entries(data.by_model_version).map(([version, count]) => ({ version, count }));
 
   return (

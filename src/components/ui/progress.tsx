@@ -1,4 +1,7 @@
-// STUB — DELETE AT STITCH TIME. See button.tsx for context.
+// Hand-rolled, not a generated shadcn/ui primitive — agent-1-foundation's scaffold never
+// included a Progress component, and the screening upload flow depends on one, so this stayed
+// as-is at stitch time rather than being deleted like the other agents' throwaway UI stubs.
+// Safe to swap for a real `npx shadcn add progress` output later; nothing else needs to change.
 // Supports an indeterminate state (value=undefined) for the window after bytes are fully sent
 // but before the server has responded, since we have no real percentage for that phase.
 

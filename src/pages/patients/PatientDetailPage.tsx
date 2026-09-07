@@ -71,7 +71,14 @@ const scanColumns = [
   }),
   scanColumnHelper.accessor("risk_level", {
     header: "Risk level",
-    cell: (info) => <RiskBadge level={info.getValue()} />,
+    cell: (info) => {
+      const level = info.getValue();
+      return level ? (
+        <RiskBadge level={level} />
+      ) : (
+        <span className="text-sm text-muted-foreground">Pending</span>
+      );
+    },
   }),
   scanColumnHelper.accessor("dr_probability", {
     header: "DR risk",
@@ -282,11 +289,9 @@ export default function PatientDetailPage() {
                   }}
                 />
                 <Tooltip
-                  formatter={(value: number | null, name: string) => [
-                    value === null || value === undefined
-                      ? "No data"
-                      : `${Math.round(value * 100)}%`,
-                    name,
+                  formatter={(value, name) => [
+                    typeof value !== "number" ? "No data" : `${Math.round(value * 100)}%`,
+                    String(name),
                   ]}
                   labelFormatter={(label) => `Screening on ${label}`}
                 />

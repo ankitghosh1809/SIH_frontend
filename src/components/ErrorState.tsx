@@ -1,31 +1,34 @@
-// STUB — DELETE AT STITCH TIME.
-// Owned by Agent 1 at this same path. Same situation as EmptyState.tsx: the
-// work order names this component but gives no example code, so this is a
-// minimal, generic version invented to unblock ScanDetailPage's 404 /
-// network-error states during standalone dev. Delete this file when Agent
-// 1's real src/components/ErrorState.tsx lands at the same path.
+import type { ReactNode } from "react";
+import { AlertCircle } from "lucide-react";
 
-export interface ErrorStateProps {
+import { cn } from "@/lib/utils";
+
+interface ErrorStateProps {
   title: string;
   description?: string;
-  action?: { label: string; href: string };
+  action?: ReactNode;
+  className?: string;
 }
 
-export function ErrorState({ title, description, action }: ErrorStateProps) {
+// Every data-fetching view uses this for its failed-request state, instead
+// of each page inventing its own error message. role="alert" so screen
+// readers announce it as soon as it appears (Accessibility baseline: aria-
+// live for async UI).
+export function ErrorState({ title, description, action, className }: ErrorStateProps) {
   return (
-    <div className="flex flex-col items-center gap-3 rounded-[var(--radius)] border border-border bg-muted/40 px-6 py-16 text-center">
-      <p className="text-base font-medium text-foreground">{title}</p>
-      {description && (
-        <p className="max-w-sm text-sm text-muted-foreground">{description}</p>
+    <div
+      role="alert"
+      className={cn(
+        "flex flex-col items-center justify-center gap-3 rounded-lg border border-destructive/30 bg-destructive/5 px-6 py-12 text-center",
+        className
       )}
-      {action && (
-        <a
-          href={action.href}
-          className="mt-2 inline-flex h-9 items-center justify-center rounded-[var(--radius)] border border-border px-4 text-sm font-medium hover:bg-muted"
-        >
-          {action.label}
-        </a>
-      )}
+    >
+      <AlertCircle className="size-8 text-destructive" aria-hidden="true" />
+      <div className="space-y-1">
+        <p className="text-sm font-medium text-foreground">{title}</p>
+        {description ? <p className="text-sm text-muted-foreground">{description}</p> : null}
+      </div>
+      {action}
     </div>
   );
 }

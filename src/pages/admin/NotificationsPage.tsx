@@ -131,7 +131,7 @@ export default function NotificationsPage() {
         />
       ) : (data ?? []).length === 0 ? (
         <EmptyState
-          icon={Bell}
+          icon={<Bell className="size-8" />}
           title={unreadOnly ? "No unread notifications" : "No notifications yet"}
           description={unreadOnly ? "You're all caught up." : "High-risk detections and completed reviews will show up here."}
         />

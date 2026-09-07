@@ -29,7 +29,6 @@ const PAGE_SIZE = 20;
 // empty state at it but the shared ROUTES stub (src/lib/routes.ts) doesn't
 // define one, so this is a guess rather than an edit to that shared file.
 // Confirm the real path with Agent 2 at stitch time.
-const UPLOAD_PATH_GUESS = "/scans/upload";
 
 const columnHelper = createColumnHelper<ScanListItem>();
 
@@ -87,7 +86,7 @@ export default function ScanHistoryPage() {
           <EmptyState
             title="No scans yet"
             description="Upload a retinal photo to run your first screening."
-            action={{ label: "Upload a scan", href: UPLOAD_PATH_GUESS }}
+            action={<Button onClick={() => navigate(ROUTES.upload)}>Upload a scan</Button>}
           />
         ) : (
           <>
